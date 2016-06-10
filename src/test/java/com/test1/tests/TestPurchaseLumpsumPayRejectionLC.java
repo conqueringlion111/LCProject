@@ -20,35 +20,34 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 
-public class AddNotesToCase extends TestBase
+public class TestPurchaseLumpsumPayRejectionLC extends TestBase
 
 {
 	
 
   @Test (dataProvider = "dataProvider")
-  public void testSuccessfulNotesAdd(String casenumber, String notes)throws InterruptedException, IOException
+  public void testSuccessfulPurchaseLumpsumPayRejectionLC(String casenumber, String day, String month, String year,
+		  String amount) throws InterruptedException, IOException 
   {
 
 	
-	//The entry point LogInPage object below can now be removed because its added to TestBase can now inherit this
-    //LogInPage logInPage = new LogInPage(driver);
+	//The entry point DefaultLandingPage object below can now be removed because its added to TestBase can now inherit this
+    //DefaultLandingPage defaultlandingpage = new DefaultLandingPage(driver);
 	  
 	boolean testResult = defaultlandingpage.ClickResearchCasesLink()
 										   .clickCaseNumbertLink(casenumber)
-										   .ClickContinueLinkwithOutFillingOut()
-										   .ClickContinueLinkwithOutFillingOut()
-										   .ClickContinueLinkwithOutFillingOut()
-										   .ClickContinueLinkwithOutFillingOut()
-										   .ClickContinueLinkwithOutFillingOut()
-										   .ClickContinueToNotes()
-										   .ClickAddNoteButtonAddNote(notes)
-										   .isAddNotesSuccessful(notes, casenumber); 
+			 						       .ClickContinueLinkwithOutFillingOut()
+			 						       .ClickContinueLinkwithOutFillingOut()
+			 						       .ClickContinueLinkwithOutFillingOut()
+			 						       .ClickContinueLinkwithOutFillingOut()
+			 						       .CreateLumpsumPaymentLifeCon(amount, month, year, day)
+			 						       .isAddPurchaseLumpsumRejectionMessageSuccessful(); 
   
 	 System.out.println(testResult);
 	 
 	 Thread.sleep(2000);
 	 
-	 Assert.assertTrue(testResult, "Note has not been successfully added for : " + casenumber);
+	 Assert.assertTrue(testResult, "Add payment rejection is not successful for casenumber: " + casenumber);
 	 
   }
   

@@ -20,35 +20,33 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterMethod;
 
-public class AddNotesToCase extends TestBase
+public class AddAnnuityPeriodicPayment extends TestBase
 
 {
 	
 
   @Test (dataProvider = "dataProvider")
-  public void testSuccessfulNotesAdd(String casenumber, String notes)throws InterruptedException, IOException
+  public void testSuccessfulMonthlyAnnuityPeriodicPayAdd(String casenumber, String day, String month, String year,
+		  String amount, String paycount, String frequency) throws InterruptedException, IOException 
   {
 
 	
-	//The entry point LogInPage object below can now be removed because its added to TestBase can now inherit this
-    //LogInPage logInPage = new LogInPage(driver);
+	//The entry point DefaultLandingPage object below can now be removed because its added to TestBase can now inherit this
+    //DefaultLandingPage defaultlandingpage = new DefaultLandingPage(driver);
 	  
 	boolean testResult = defaultlandingpage.ClickResearchCasesLink()
 										   .clickCaseNumbertLink(casenumber)
-										   .ClickContinueLinkwithOutFillingOut()
-										   .ClickContinueLinkwithOutFillingOut()
-										   .ClickContinueLinkwithOutFillingOut()
-										   .ClickContinueLinkwithOutFillingOut()
-										   .ClickContinueLinkwithOutFillingOut()
-										   .ClickContinueToNotes()
-										   .ClickAddNoteButtonAddNote(notes)
-										   .isAddNotesSuccessful(notes, casenumber); 
+			 						       .ClickContinueLinkwithOutFillingOut()
+			 						       .ClickContinueLinkwithOutFillingOut()
+			 						       .ClickContinueLinkwithOutFillingOut()
+			 						       .CreatePeriodicPayment(amount, month, year, day, paycount, frequency)
+			 						       .isAddPeriodicMonthlyPaymentSuccessful(amount, year, day, month, paycount, frequency); 
   
 	 System.out.println(testResult);
 	 
 	 Thread.sleep(2000);
 	 
-	 Assert.assertTrue(testResult, "Note has not been successfully added for : " + casenumber);
+	 Assert.assertTrue(testResult, "Case Summary information has not been successfully entered for : " + casenumber);
 	 
   }
   
